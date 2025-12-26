@@ -1,11 +1,4 @@
 #include<stdio.h>
-unsigned long long f(int a,int b){
-    if(a==b){
-        return a;
-    }
-    return a*f(a-1,b);
-}
-
 int main(void){
     int test;
     scanf("%d",&test);
@@ -14,17 +7,13 @@ int main(void){
         int N,M;
         scanf("%d %d",&N,&M);
 
-        //분자 구하기
-        int start,end;
-        start=M;
-        end=M-N+1;
-        unsigned long long num=f(start,end);
-        
-        //분모 구하기
-        unsigned long long den=f(N,1);
-        
-        //조합  
-        int P = num/den;
-        printf("%d\n",P);
+        // 한 번 반복에 값 구하기2
+         long long P=1;
+         for(int j=1;j<=N;j++){
+            P*=M+1-j;
+            P/=j;
+         }
+
+         printf("%lld\n",P);
     }
 }
