@@ -2,15 +2,10 @@
 #include<stdlib.h>
 #include<string.h>
 
-int pop(int* que,int cnt){
-    int temp;
-   
+void pop(int* que,int cnt,int first){
     // 제일 앞의 값 제거 및 출력
-    temp = que[0];
-    for(int i=1;i<cnt;i++){
-        que[i-1] = que[i];
-    }
-    return temp;
+    printf("%d\n",que[first]);
+    que[first] = 0;
 }
 
 int main(void){
@@ -23,22 +18,28 @@ int main(void){
 
     char instruction[20];
     
+    int location=0; // 현재 que의 위치 (0포함)
+    int first=0; // 제일 앞 인덱스를 가르키는 변수 (0제외)
     int cnt=0;
     for(int i=0;i<N;i++){
         scanf("%s",instruction);
         
         if(strcmp(instruction,"push")==0){
-            scanf("%d",&que[cnt]);
+            scanf("%d",&que[location]);
             cnt++;
+            location++;
         }
 
         else if(strcmp(instruction,"pop")==0){
+            // 아무것도 없는 경우
             if(cnt == 0){
                 printf("-1\n");
             }
+
             else{
-                printf("%d\n",pop(que,cnt));
+                pop(que,cnt,first);
                 cnt--;
+                first++;
             }
             
         }
@@ -61,7 +62,7 @@ int main(void){
                 printf("-1\n");
             }
             else{
-                printf("%d\n",que[0]);
+                printf("%d\n",que[first]);
             }
         }
 
@@ -70,7 +71,7 @@ int main(void){
                 printf("-1\n");
             }
             else{
-                printf("%d\n",que[cnt-1]);
+                printf("%d\n",que[location-1]);
             }
         }
     }
