@@ -2,10 +2,10 @@
 #include<stdlib.h>
 #include<string.h>
 
-void pop(int* que,int cnt,int first){
+void pop(int* que,int first){
     // 제일 앞의 값 제거 및 출력
     printf("%d\n",que[first]);
-    que[first] = 0;
+    que[first] = 0; 
 }
 
 int main(void){
@@ -18,7 +18,7 @@ int main(void){
 
     char instruction[20];
     
-    int location=0; // 현재 que의 위치 (0포함)
+    int location=0; // 현재 que의 크기 (0포함)
     int first=0; // 제일 앞 인덱스를 가르키는 변수 (0제외)
     int cnt=0;
     for(int i=0;i<N;i++){
@@ -37,7 +37,7 @@ int main(void){
             }
 
             else{
-                pop(que,cnt,first);
+                pop(que,first);
                 cnt--;
                 first++;
             }
