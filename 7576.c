@@ -12,6 +12,7 @@ typedef struct C{
     int y;
 }C;
 
+// 현재 좌표를 기준으로 동서남북 좌표를 계산하여 반환
 D get_d(C current){
     D result;
 
@@ -27,8 +28,8 @@ int main(void){
     int M,N,cnt=0,ripe_top=-1,pp_top=-1;
     scanf("%d %d",&M,&N);
 
-    C ripe[M*N]; // 처리 안 된 익은 토마토 스택
-    C pp[M*N]; // 대기 열
+    C ripe[M*N]; // 처리 해야 할 익은 토마토 스택
+    C pp[M*N]; // 다음 날 익게 되는 토마토 대기 열
     int arr[N+2][M+2]; // 창고
 
     for(int i=1;i<=N;i++){
@@ -41,13 +42,14 @@ int main(void){
             }
         }   
     }
-    // 저장될 때부터 모든 토마토가 익어있는 상태
+
+    // 예외 처리: 이미 모든 칸이 익은 상태인지 확인
     if(N*M == ripe_top+1){
         printf("0"); 
         return 0;
     }
 
-    //테두리를 빈 칸으로
+    //테두리를 -1로 둘러싸기
     for(int i=0;i<M+2;i++){
         arr[0][i] = -1;
         arr[N+1][i] = -1;
@@ -89,10 +91,10 @@ int main(void){
             }
             ripe_top--;
         }
-        //토마토가 익어진 경우에만
+        //토마토가 새로 익은 경우에만
         if(result!=0) cnt++;
 
-        if(pp_top==-1) break;
+        if(pp_top==-1) break; // 더 이상 새로 익을 토마토가 없으면 종료
         else{ // 대기열에 있는 값을 옮기기
             while(pp_top!=-1){
                 ripe[++ripe_top] = pp[pp_top--];
@@ -100,7 +102,7 @@ int main(void){
         }
 
     }
-    // 토마토가 모두 익지는 못하는 상황
+    // 안 익은 토마토(0)가 남아있는지 확인
     for(int i=1;i<=N;i++){
         for(int j=1;j<=M;j++){
             if(arr[i][j] == 0){
@@ -111,15 +113,5 @@ int main(void){
     }
 
     printf("%d",cnt);
-
-    /*  창고 확인용
-    printf("----------------------------------\n");
-    for(int i=1;i<=N;i++){
-        for(int j=1;j<=M;j++){
-            printf("%d ",arr[i][j]);
-        }   
-        printf("\n");
-    }         
-    */
    
 }
