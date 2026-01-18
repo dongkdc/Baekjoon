@@ -54,21 +54,21 @@ int main(void){
     pre->f_link = head; // 원형 연결리스트 만들기
     head->b_link = pre;
     
-    ballon = pre; // 원하는 풍선 바로 이전을 가르킨다.
-
+    // 풍선 터뜨리기 시작
+    ballon = head; 
     for(int i=0;i<N;i++){
-        arr[i] = ballon->f_link->id;
-        paper = ballon->f_link->data;
-        ballon = del(ballon,ballon->f_link);
+        arr[i] = ballon->id;
+        paper = ballon->data;
+        ballon = del(ballon->b_link,ballon);
 
         // 풍선 이동
         if(paper>0){ 
-            for(int j=0;j<paper-1;j++){ 
+            for(int j=0;j<paper;j++){ 
                 ballon = ballon->f_link;
             }
         }
         else{
-            for(int j=0;j<-paper;j++){ 
+            for(int j=0;j<(-paper)-1;j++){ 
                 ballon = ballon->b_link;
             }
         }
