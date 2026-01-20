@@ -1,36 +1,32 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 int main(){
-    int N,num=10,cnt=0;
-    scanf("%d",&N);
-    int* ID = (int*)malloc(N*sizeof(int));
-    
-    for(int i=0;i<N;i++){
-        scanf("%d",&ID[i]);
-    }
+    int N,len,idx,cnt=0;
+    char ID[1001][101];
 
+    scanf("%d",&N);
+    for(int i=0;i<N;i++){
+        scanf("%s",ID[i]);
+    }
+    len = strlen(ID[0]);
+
+    idx = len-1;
     while(1){
-        int* cp = (int*)malloc(N*sizeof(int));
-        int status = 0;
-        for(int i=0;i<N;i++){ // 학생 끼리 비교
-            if(status == 0){
-                cp[i] = ID[i] % num;
-                for(int j=i-1;j>=0;j--){
-                    if(cp[i] == cp[j]){
-                        status = 1;
-                        break;
-                    }
+        int status = 1;
+        for(int i=0;i<N;i++){
+            for(int j=i+1;j<N;j++){
+                if(strcmp(ID[i]+idx,ID[j]+idx)==0){
+                    status = 0;
+                    break;
                 }
             }
+            if(status == 0) break;
         }
-        if(status == 0) break;
         cnt++;
-        num*=10;
-        free(cp);
+        if(status==1) break;
+        idx--;
     }
-
-    printf("%d",cnt+1);
-
-    free(ID);
+    printf("%d",cnt);
 }
