@@ -1,10 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-void pop(void){
-    
-}
-
 int main(void){
     int N,cnt;
     scanf("%d",&N);
