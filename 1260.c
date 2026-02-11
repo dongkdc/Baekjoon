@@ -2,7 +2,7 @@
 #include<stdlib.h>
 
 void DFS(int (*arr)[1001],int V,int N){
-    int stack[1001];
+    int stack[10001];
     int visited[1001] = {0};
     int top =-1;
     
@@ -32,7 +32,7 @@ void DFS(int (*arr)[1001],int V,int N){
 }
 
 void BFS(int (*arr)[1001],int V,int N){
-    int que[1001];
+    int que[10001];
     int head=0,tail=0;
     int visited[1001] = {0};
 
